@@ -91,42 +91,48 @@ def update_stats(proto):
 
 
 # --- 3. بناء واجهة المستخدم (GUI) ---
-root = tk.Tk()
-root.title("***Packing sniffing***")
 
-# اختيار الواجهة (Interface)
-top_frame = tk.Frame(root)
-top_frame.pack(pady=10)
+def run_sniffer_ui():
+    global root, iface_box, start_btn, stop_btn, total_lbl, tcp_lbl, udp_lbl, table
+    root = tk.Tk()
+    root.title("***Packing sniffing***")
 
-tk.Label(top_frame, text="choose interface:").pack(side="left")
-iface_box = ttk.Combobox(top_frame, values=get_if_list())
-iface_box.pack(side="left", padx=5)
+    # اختيار الواجهة (Interface)
+    top_frame = tk.Frame(root)
+    top_frame.pack(pady=10)
 
-start_btn = tk.Button(top_frame, text="start", command=start_sniffing, bg="green", fg="white")
-start_btn.pack(side="left", padx=5)
+    tk.Label(top_frame, text="choose interface:").pack(side="left")
+    iface_box = ttk.Combobox(top_frame, values=get_if_list())
+    iface_box.pack(side="left", padx=5)
 
-stop_btn = tk.Button(top_frame, text="stop", command=stop_capture, state="disabled", bg="red", fg="white")
-stop_btn.pack(side="left", padx=5)
+    start_btn = tk.Button(top_frame, text="start", command=start_sniffing, bg="green", fg="white")
+    start_btn.pack(side="left", padx=5)
 
-export_btn = tk.Button(top_frame, text="export PCAP", command=export_pcap)
-export_btn.pack(side="left", padx=5)
+    stop_btn = tk.Button(top_frame, text="stop", command=stop_capture, state="disabled", bg="red", fg="white")
+    stop_btn.pack(side="left", padx=5)
 
-# الإحصائيات
-stats_frame = tk.Frame(root)
-stats_frame.pack(pady=5)
-total_lbl = tk.Label(stats_frame, text="Total: 0")
-total_lbl.pack(side="left", padx=10)
-tcp_lbl = tk.Label(stats_frame, text="TCP: 0")
-tcp_lbl.pack(side="left", padx=10)
-udp_lbl = tk.Label(stats_frame, text="UDP: 0")
-udp_lbl.pack(side="left", padx=10)
+    export_btn = tk.Button(top_frame, text="export PCAP", command=export_pcap)
+    export_btn.pack(side="left", padx=5)
 
-# الجدول
-table = ttk.Treeview(root, columns=("src", "dst", "proto", "len"), show="headings")
-table.heading("src", text="Source IP")
-table.heading("dst", text="Destination IP")
-table.heading("proto", text="Protocol")
-table.heading("len", text="Length")
-table.pack(padx=10, pady=10, fill="both", expand=True)
+    # الإحصائيات
+    stats_frame = tk.Frame(root)
+    stats_frame.pack(pady=5)
+    total_lbl = tk.Label(stats_frame, text="Total: 0")
+    total_lbl.pack(side="left", padx=10)
+    tcp_lbl = tk.Label(stats_frame, text="TCP: 0")
+    tcp_lbl.pack(side="left", padx=10)
+    udp_lbl = tk.Label(stats_frame, text="UDP: 0")
+    udp_lbl.pack(side="left", padx=10)
 
-root.mainloop()
+    # الجدول
+    table = ttk.Treeview(root, columns=("src", "dst", "proto", "len"), show="headings")
+    table.heading("src", text="Source IP")
+    table.heading("dst", text="Destination IP")
+    table.heading("proto", text="Protocol")
+    table.heading("len", text="Length")
+    table.pack(padx=10, pady=10, fill="both", expand=True)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    run_sniffer_ui()
