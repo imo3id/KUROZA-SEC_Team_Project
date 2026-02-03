@@ -7,7 +7,7 @@ import threading
 # --- 1. متغيرات عالمية (Global) لتسهيل الوصول إليها ---
 captured_packets = []  # لتخزين الحزم الأصلية من أجل التصدير لاحقاً
 
-#Mohammed
+
 def get_packet_info(pkt):
     """ دالة بسيطة لاستخراج المعلومات الأساسية من الحزمة """
     src_ip = pkt[IP].src if IP in pkt else "-"
