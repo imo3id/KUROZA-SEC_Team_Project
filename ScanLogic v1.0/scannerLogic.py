@@ -7,7 +7,7 @@ import config
 import network_utils
 import ui_reporter
 
-class NetworkSherlock:
+class ScannerLogic:
     def __init__(self):
         self.args = config.get_arguments()
         self.results = []
@@ -45,5 +45,5 @@ class NetworkSherlock:
         ui_reporter.save_report(self.args.output, self.results, self.args.target, os_info, duration_str)
 
 if __name__ == "__main__":
-    scanner = NetworkSherlock()
+    scanner = ScannerLogic()
     scanner.run()
