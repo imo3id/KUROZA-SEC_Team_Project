@@ -4,6 +4,35 @@ from scapy.all import sniff, get_if_list, wrpcap
 from scapy.layers.inet import IP, TCP, UDP
 import threading
 
+*****kالتحقق من انكك ادمن ******
+
+import os
+import sys
+import ctypes
+
+def is_admin():
+    try:
+   
+        if os.name == 'nt':
+            return ctypes.windll.shell32.IsUserAnAdmin() != 0
+    
+        else:
+            return os.getuid() == 0
+    except AttributeError:
+        return False
+
+
+if not is_admin():
+
+    if os.name == 'nt':
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+        sys.exit()
+    else:
+        print("Error: This script must be run as root (sudo).")
+        sys.exit()
+
+
+*************
 
 captured_packets = []
 
