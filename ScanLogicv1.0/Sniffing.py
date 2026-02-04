@@ -40,7 +40,7 @@ ip_counter=Counter()
 
 
 def get_packet_info(pkt):#22
-    """ دالة بسيطة لاستخراج المعلومات الأساسية من الحزمة """
+    """  """
     src_ip = pkt[IP].src if IP in pkt else "-"
     dst_ip = pkt[IP].dst if IP in pkt else "-"
 
